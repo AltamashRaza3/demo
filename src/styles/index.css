@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    background-color: #FBFBFC;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tightest text-ink;
+  }
+
+  :focus-visible {
+    outline: 2px solid #2A4FD9;
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: #DCE4FD;
+    color: #0B1A52;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-wr {
+    @apply mx-auto w-full max-w-container px-6 sm:px-8 lg:px-12;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-blue-500;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+}
+
+/* Signature placeholder-image treatment: layered gradient + grain, styled per category */
+.wr-media {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(155deg, #EEF2FF 0%, #F4F5F7 45%, #E7E9EC 100%);
+}
+.wr-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.wr-media-electrical { background: linear-gradient(155deg, #1D3FC2 0%, #2A4FD9 45%, #0B1A52 100%); }
+.wr-media-plumbing { background: linear-gradient(155deg, #DCE4FD 0%, #B9C6F5 50%, #7C93E8 100%); }
+.wr-media-paint { background: linear-gradient(155deg, #F4F5F7 0%, #E7E9EC 50%, #D7DAE0 100%); }
+.wr-media-hardware { background: linear-gradient(155deg, #14171A 0%, #3A3F45 50%, #1D3FC2 100%); }
+
+.text-balance { text-wrap: balance; }
