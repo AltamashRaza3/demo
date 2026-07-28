@@ -24,32 +24,12 @@ export default function Footer() {
           </p>
 
           <p className="mt-5 text-xs leading-6 text-white/45">
-            ✓ Genuine Products <br />
-            ✓ Authorized Brand Dealer <br />
-            ✓ GST Billing <br />✓ Wholesale & Retail Supply
+             Genuine Products <br />
+             Authorized Brand Dealer <br />
+             GST Billing <br /> Wholesale & Retail Supply
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href={`tel:${company.phone.replace(/\s/g, "")}`}
-              className="rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold transition hover:bg-blue-700"
-            >
-              Call Now
-            </a>
-
-            <a
-              href={`https://wa.me/${company.whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-xl border border-white/15 px-4 py-2 text-xs font-semibold transition hover:bg-white hover:text-black"
-            >
-              WhatsApp
-            </a>
-          </div>
-
-          
         </div>
-
 
         <div>
           <h3 className="eyebrow text-blue-400 mb-5">Categories</h3>
@@ -67,8 +47,6 @@ export default function Footer() {
           </ul>
         </div>
 
-        
-
         <div>
           <h3 className="eyebrow text-blue-400 mb-5">Company</h3>
           <ul className="space-y-3">
@@ -77,6 +55,7 @@ export default function Footer() {
               ["Services", "/services"],
               ["Brands", "/brands"],
               ["Gallery", "/gallery"],
+              ["FAQ", "/faq"],
               ["Contact", "/contact"],
             ].map(([label, to]) => (
               <li key={to}>

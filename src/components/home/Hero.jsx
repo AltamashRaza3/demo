@@ -4,6 +4,8 @@ import { ChevronDown, Phone, MessageCircle } from "lucide-react";
 import MagneticButton from "../common/MagneticButton.jsx";
 import { company } from "../../data/site.js";
 
+import heroMain from "../../assets/images/hero/hero-main.png";
+
 const words = [
   "Everything",
   "Your",
@@ -64,40 +66,6 @@ export default function Hero() {
         "-=0.35",
       );
 
-      gsap.to(q(".hero-float-1"), {
-        y: -22,
-        x: 10,
-        rotate: 6,
-        duration: 5,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-        overwrite: "auto",
-      });
-
-      gsap.to(q(".hero-float-2"), {
-        y: 20,
-        x: -14,
-        rotate: -5,
-        duration: 6.5,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-        overwrite: "auto",
-        delay: 0.4,
-      });
-
-      gsap.to(q(".hero-float-3"), {
-        y: -16,
-        x: -8,
-        rotate: 4,
-        duration: 4.5,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-        overwrite: "auto",
-        delay: 0.8,
-      });
     }, headlineRef);
 
     return () => ctx.revert();
@@ -105,94 +73,122 @@ export default function Hero() {
 
   return (
     <section ref={headlineRef} className="relative overflow-hidden bg-smoke-50">
+      {/* Background */}
       <div
         aria-hidden="true"
         className="absolute inset-0 bg-grain pointer-events-none"
       />
 
       <div
-        aria-hidden="true"
-        className="hero-float-1 absolute top-28 right-[6%] hidden h-24 w-24 rounded-3xl wr-media wr-media-electrical shadow-card sm:block sm:h-32 sm:w-32"
-      />
+        className="
+        container-wr
+        relative
+        grid
+        items-center
+        min-h-[calc(100vh-88px)]
+        gap-8
+        pt-6
+        pb-12
+        lg:grid-cols-[0.9fr_1.3fr]
+        lg:gap-8
+        lg:pt-6
+        lg:pb-12
+        xl:gap-12
+        "
+      >
+        {/* Left */}
+        <div className="hero-fade order-2 lg:order-1 relative z-20">
+          <p className="eyebrow mb-6">
+            Established {company.established} • Siwan, Bihar
+          </p>
 
-      <div
-        aria-hidden="true"
-        className="hero-float-2 absolute bottom-24 right-[16%] hidden h-20 w-20 rounded-2xl wr-media wr-media-plumbing shadow-card sm:block sm:h-28 sm:w-28"
-      />
-
-      <div
-        aria-hidden="true"
-        className="hero-float-3 absolute top-1/2 right-[2%] hidden h-16 w-16 rounded-full wr-media wr-media-paint shadow-card lg:block lg:h-20 lg:w-20"
-      />
-
-      <div className="container-wr relative pt-16 pb-28 lg:pt-24 lg:pb-36">
-        <p className="hero-fade eyebrow mb-6">
-          Established {company.established} · Siwan, Bihar
-        </p>
-
-        <h1 className="max-w-4xl font-display text-[2.6rem] font-extrabold leading-[0.98] tracking-tightest sm:text-6xl lg:text-7xl">
-          {words.map((word, index) => (
-            <span
-              key={index}
-              className="mr-3 inline-block overflow-hidden align-top sm:mr-4"
-            >
-              <span
-                className={`hero-word inline-block ${
-                  word === "One" || word === "Roof" ? "text-blue-600" : ""
-                }`}
-              >
-                {word}
+          <h1 className="font-display text-[2.9rem] font-extrabold leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
+            {words.map((word, index) => (
+              <span key={index} className="mr-3 inline-block overflow-hidden">
+                <span
+                  className={`hero-word inline-block ${
+                    word === "One" || word === "Roof" ? "text-blue-600" : ""
+                  }`}
+                >
+                  {word}
+                </span>
               </span>
-            </span>
-          ))}
-        </h1>
+            ))}
+          </h1>
 
-        <p className="hero-fade mt-8 max-w-xl text-lg leading-relaxed text-ink-soft">
-          Hardware, electrical, plumbing and paint — genuine products, wholesale
-          pricing and installation support, all from one address on Qutub Chapra Siswan–Siwan
-          Road.
-        </p>
+          <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink-soft">
+            Premium hardware, electrical, plumbing and paint solutions for
+            homes, businesses and construction projects. Genuine brands,
+            competitive pricing, GST billing and expert support—all under one
+            roof in Siwan.
+          </p>
 
-        <div className="hero-fade mt-10 flex flex-wrap items-center gap-4">
-          <MagneticButton as="link" to="/products" variant="solid">
-            Explore Products
-          </MagneticButton>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <MagneticButton as="link" to="/products" variant="solid">
+              Explore Products
+            </MagneticButton>
 
-          <MagneticButton as="link" to="/contact" variant="ghost">
-            Request Quote
-          </MagneticButton>
+            <MagneticButton
+              as="a"
+              href={`https://wa.me/${company.whatsapp}`}
+              className="border-0 bg-[#25D366] text-white hover:bg-[#20ba5a]"
+            >
+              <MagneticButton
+                as="a"
+                href={`tel:${company.phone.replace(/\s/g, "")}`}
+                variant="light"
+              >
+                <Phone size={16} />
+                Call Now
+              </MagneticButton>
+              <MessageCircle size={16} />
+              WhatsApp
+            </MagneticButton>
+          </div>
 
-          <MagneticButton
-            as="a"
-            href={`https://wa.me/${company.whatsapp}`}
-            variant="light"
-          >
-            <MessageCircle size={16} /> WhatsApp
-          </MagneticButton>
+          <div className="mt-14 flex flex-wrap items-center gap-4 text-sm text-ink-soft">
+            <span className="flex text-base text-blue-500">★★★★★</span>
 
-          <MagneticButton
-            as="a"
-            href={`tel:${company.phone.replace(/\s/g, "")}`}
-            variant="light"
-          >
-            <Phone size={16} /> Call Now
-          </MagneticButton>
+            <span className="font-semibold text-ink">5.0 Google Rating</span>
+
+            <span>•</span>
+
+            <span>Since 2017</span>
+
+            <span>•</span>
+
+            <span>GST Billing</span>
+          </div>
         </div>
 
-        <div className="hero-fade mt-16 flex items-center gap-3 text-sm text-ink-soft">
-          <span className="flex text-blue-500">★★★★★</span>
+        {/* Right */}
+        <div className="hero-fade order-1 relative flex items-center justify-center lg:order-2 lg:-translate-y-24 xl:-translate-y-w8 2xl:-translate-y-32">
+          <div className="absolute h-[520px] w-[520px] rounded-full bg-blue-500/10 blur-[140px]" />
 
-          <span className="font-semibold text-ink">5.0 Google Rating</span>
-
-          <span className="hidden sm:inline">
-            — trusted across Siwan since 2017
-          </span>
+          <img
+            src={heroMain}
+            alt="W R Enterprises - Hardware, Electrical, Plumbing & Paint"
+            className="
+            relative
+            z-10
+            w-full
+            max-w-md
+            object-contain
+            drop-shadow-[0_45px_80px_rgba(0,0,0,0.16)]
+            sm:max-w-lg
+            md:max-w-xl
+            lg:max-w-[840px]
+            xl:max-w-[980px]
+            2xl:max-w-[1100px]
+          "
+          />
         </div>
       </div>
 
+      {/* Scroll Indicator */}
       <div
         aria-hidden="true"
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-ink-soft/60"
+        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-ink-soft/60 lg:flex"
       >
         <span className="text-[11px] uppercase tracking-[0.25em]">Scroll</span>
 

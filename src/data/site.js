@@ -1,6 +1,16 @@
 // Central content source — keeps copy separate from components.
 // Replace placeholder values with real business data/photos when available.
 
+import bulbImg from "../assets/images/products/bulb.png";
+import doorLocksImg from "../assets/images/products/doorlocks.png";
+import faucetImg from "../assets/images/products/faucet.png";
+import paintImg from "../assets/images/products/paint.png";
+import plumbingPipeImg from "../assets/images/products/plumbing pipe.png";
+import switchesImg from "../assets/images/products/switches.png";
+import waterTankImg from "../assets/images/products/watertank1.png";
+import wiresImg from "../assets/images/products/wires.png";
+
+
 export const company = {
   name: 'W R Enterprises',
   established: 2017,
@@ -63,15 +73,71 @@ export const categories = [
 ]
 
 export const featuredProducts = [
-  { id: 1, name: 'Modular Switch Series', category: 'Electrical', sku: 'WR-EL-014' },
-  { id: 2, name: 'Armoured Copper Cable', category: 'Electrical', sku: 'WR-EL-002' },
-  { id: 3, name: 'CPVC Plumbing Pipe', category: 'Plumbing', sku: 'WR-PL-007' },
-  { id: 4, name: 'Overhead Water Tank', category: 'Plumbing', sku: 'WR-PL-003' },
-  { id: 5, name: 'Weatherproof Exterior Paint', category: 'Paint', sku: 'WR-PT-009' },
-  { id: 6, name: 'Premium Door Lock Set', category: 'Hardware', sku: 'WR-HW-021' },
-  { id: 7, name: 'LED Batten Light', category: 'Electrical', sku: 'WR-EL-019' },
-  { id: 8, name: 'Chrome Bathroom Faucet', category: 'Plumbing', sku: 'WR-PL-011' },
-]
+  {
+    id: 1,
+    name: "L&T Modular Switch Series",
+    category: "Electrical",
+    sku: "WR-EL-014",
+    brand: "L&T",
+    image: switchesImg,
+  },
+  {
+    id: 2,
+    name: "Bajaj House Wires",
+    category: "Electrical",
+    sku: "WR-EL-002",
+    brand: "Bajaj",
+    image: wiresImg,
+  },
+  {
+    id: 3,
+    name: "Hindware CPVC Plumbing Pipe",
+    category: "Plumbing",
+    sku: "WR-PL-007",
+    brand: "Hindware",
+    image: plumbingPipeImg,
+  },
+  {
+    id: 4,
+    name: "Ashirvad Overhead Water Tank",
+    category: "Plumbing",
+    sku: "WR-PL-003",
+    brand: "Ashirvad",
+    image: waterTankImg,
+  },
+  {
+    id: 5,
+    name: "Indigo / Birla Opus Exterior Paint",
+    category: "Paint",
+    sku: "WR-PT-009",
+    brand: "Indigo Paints",
+    image: paintImg,
+  },
+  {
+    id: 6,
+    name: "Premium Door Lock Set",
+    category: "Hardware",
+    sku: "WR-HW-021",
+    brand: "Hardware",
+    image: doorLocksImg,
+  },
+  {
+    id: 7,
+    name: "LED Bulb",
+    category: "Electrical",
+    sku: "WR-EL-019",
+    brand: "Bajaj",
+    image: bulbImg,
+  },
+  {
+    id: 8,
+    name: "Chrome Bathroom Faucet",
+    category: "Plumbing",
+    sku: "WR-PL-011",
+    brand: "Hindware",
+    image: faucetImg,
+  },
+];
 
 export const services = [
   { id: 'retail', name: 'Retail Sales', description: 'Walk in and pick exactly what your project needs, with staff who know the difference between a CPVC fitting and a PVC one.' },

@@ -1,38 +1,67 @@
-const mediaClass = {
-  electrical: 'wr-media-electrical',
-  plumbing: 'wr-media-plumbing',
-  paint: 'wr-media-paint',
-  hardware: 'wr-media-hardware',
-}
+import electricalImg from "../../assets/images/categories/electrical.png";
+import plumbingImg from "../../assets/images/categories/plumbing.png";
+import paintImg from "../../assets/images/categories/paint.png";
+import hardwareImg from "../../assets/images/categories/hardware.png";
+
+const categoryImages = {
+  electrical: electricalImg,
+  plumbing: plumbingImg,
+  paint: paintImg,
+  hardware: hardwareImg,
+};
 
 export default function CategoryCard({ category }) {
   return (
     <article
       data-reveal
-      className="group relative shrink-0 w-[280px] sm:w-[320px] rounded-3xl bg-white border border-smoke-200 overflow-hidden shadow-soft hover:shadow-card transition-shadow duration-500"
+      className="group relative shrink-0 w-[280px] sm:w-[320px] overflow-hidden rounded-3xl border border-smoke-200 bg-white shadow-soft transition-all duration-500 hover:-translate-y-2 hover:shadow-card"
     >
-      <div className={`wr-media ${mediaClass[category.id]} h-44 flex items-start justify-between p-5`}>
-        <span className="font-mono text-[11px] tracking-widest text-white/70">{category.sku}</span>
-        <span className="font-display text-white/90 font-bold text-sm">
-          {String(category.items.length).padStart(2, '0')} lines
+      {/* Image */}
+      <div className="relative h-56 overflow-hidden bg-gradient-to-br from-smoke-50 to-white">
+        <img
+          src={categoryImages[category.id]}
+          alt={category.name}
+          className="h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+        />
+
+        {/* SKU Badge */}
+        <span className="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-1 text-[11px] font-semibold tracking-widest text-white backdrop-blur">
+          {category.sku}
+        </span>
+
+        {/* Product Count */}
+        <span className="absolute right-4 top-4 rounded-full bg-blue-600 px-3 py-1 text-[11px] font-semibold text-white shadow-md">
+          {category.items.length}+ Products
         </span>
       </div>
+
+      {/* Content */}
       <div className="p-6">
-        <h3 className="font-display font-extrabold text-xl text-ink">{category.name}</h3>
-        <p className="mt-1.5 text-sm text-ink-soft">{category.tagline}</p>
-        <ul className="mt-4 flex flex-wrap gap-1.5">
+        <h3 className="font-display text-xl font-extrabold text-ink">
+          {category.name}
+        </h3>
+
+        <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+          {category.tagline}
+        </p>
+
+        <ul className="mt-5 flex flex-wrap gap-2">
           {category.items.slice(0, 4).map((item) => (
-            <li key={item} className="text-[11px] font-medium text-ink-soft bg-smoke-100 rounded-full px-2.5 py-1">
+            <li
+              key={item}
+              className="rounded-full bg-smoke-100 px-3 py-1 text-[11px] font-medium text-ink-soft"
+            >
               {item}
             </li>
           ))}
+
           {category.items.length > 4 && (
-            <li className="text-[11px] font-medium text-blue-600 bg-blue-50 rounded-full px-2.5 py-1">
-              +{category.items.length - 4} more
+            <li className="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-semibold text-blue-600">
+              +{category.items.length - 4} More
             </li>
           )}
         </ul>
       </div>
     </article>
-  )
+  );
 }

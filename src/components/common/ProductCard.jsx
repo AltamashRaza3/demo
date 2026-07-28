@@ -1,54 +1,76 @@
-import { useRef } from 'react'
-import { ArrowUpRight } from 'lucide-react'
-
-const mediaClass = {
-  Electrical: 'wr-media-electrical',
-  Plumbing: 'wr-media-plumbing',
-  Paint: 'wr-media-paint',
-  Hardware: 'wr-media-hardware',
-}
+import { useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 export default function ProductCard({ product }) {
-  const ref = useRef(null)
+  const ref = useRef(null);
 
   const handleMove = (e) => {
-    const el = ref.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    const px = (e.clientX - rect.left) / rect.width - 0.5
-    const py = (e.clientY - rect.top) / rect.height - 0.5
-    el.style.transform = `perspective(900px) rotateX(${py * -8}deg) rotateY(${px * 8}deg) translateY(-4px)`
-  }
+    const el = ref.current;
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+
+    el.style.transform = `
+      perspective(1000px)
+      rotateX(${py * -8}deg)
+      rotateY(${px * 8}deg)
+      translateY(-6px)
+    `;
+  };
 
   const handleLeave = () => {
-    const el = ref.current
-    if (!el) return
-    el.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)'
-  }
+    if (!ref.current) return;
+
+    ref.current.style.transform =
+      "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
+  };
 
   return (
-    <div
+    <article
       data-reveal
       ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      className="group rounded-3xl bg-white border border-smoke-200 shadow-soft hover:shadow-card overflow-hidden transition-shadow duration-500 will-change-transform"
-      style={{ transformStyle: 'preserve-3d' }}
+      className="group overflow-hidden rounded-3xl border border-smoke-200 bg-white shadow-soft transition-all duration-500 hover:shadow-card will-change-transform"
+      style={{ transformStyle: "preserve-3d" }}
     >
-      <div className={`wr-media ${mediaClass[product.category] || ''} aspect-[4/3] flex items-end p-4`}>
-        <span className="text-[11px] font-semibold tracking-wide uppercase text-white/85 bg-black/20 rounded-full px-3 py-1 backdrop-blur-sm">
+      {/* Product Image */}
+      <div className="relative h-64 overflow-hidden bg-gradient-to-br from-slate-50 to-white">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+        />
+
+        {/* SKU */}
+        <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold shadow backdrop-blur">
           {product.sku}
         </span>
-      </div>
-      <div className="p-5 flex items-start justify-between gap-3">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-blue-500">{product.category}</p>
-          <h3 className="mt-1 font-display font-bold text-base text-ink leading-snug">{product.name}</h3>
-        </div>
-        <span className="shrink-0 mt-1 grid place-items-center w-9 h-9 rounded-full bg-smoke-100 text-ink group-hover:bg-blue-600 group-hover:text-white transition-colors">
-          <ArrowUpRight size={16} />
+
+        {/* Brand */}
+        <span className="absolute right-4 top-4 rounded-full bg-blue-600 px-3 py-1 text-[11px] font-semibold text-white shadow">
+          {product.brand}
         </span>
       </div>
-    </div>
-  )
+
+      {/* Content */}
+      <div className="flex items-start justify-between gap-4 p-6">
+        <div className="flex-1">
+          <p className="text-xs font-semibold uppercase tracking-wider text-blue-600">
+            {product.category}
+          </p>
+
+          <h3 className="mt-2 font-display text-lg font-bold leading-snug text-ink">
+            {product.name}
+          </h3>
+        </div>
+
+        <div className="grid h-10 w-10 place-items-center rounded-full bg-smoke-100 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
+          <ArrowUpRight size={18} />
+        </div>
+      </div>
+    </article>
+  );
 }
