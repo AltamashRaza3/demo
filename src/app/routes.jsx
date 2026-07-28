@@ -1,0 +1,31 @@
+import { Routes, Route } from 'react-router-dom'
+import Layout from '../components/layout/Layout.jsx'
+import Home from '../pages/Home.jsx'
+import About from '../pages/About.jsx'
+import Products from '../pages/Products.jsx'
+import Services from '../pages/Services.jsx'
+import Brands from '../pages/Brands.jsx'
+import Gallery from '../pages/Gallery.jsx'
+import Contact from '../pages/Contact.jsx'
+import NotFound from '../pages/NotFound.jsx'
+
+/**
+ * Central route table. Kept separate from App.jsx so routes can be
+ * scanned/edited independently of app-level providers/composition.
+ */
+export default function AppRoutes() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/brands" element={<Brands />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+  )
+}

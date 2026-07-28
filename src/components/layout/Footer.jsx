@@ -11,19 +11,55 @@ export default function Footer() {
             <span className="grid place-items-center w-9 h-9 rounded-xl bg-white text-ink font-display font-extrabold text-sm">
               WR
             </span>
-            <span className="font-display font-extrabold text-lg">{company.name}</span>
+            <span className="font-display font-extrabold text-lg">
+              {company.name}
+            </span>
           </div>
-          <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-            Hardware, electrical, plumbing and paint — under one roof in Siwan since {company.established}.
+          <p className="max-w-sm text-sm leading-relaxed text-white/65">
+            W R Enterprises is one of Siwan's trusted suppliers of premium
+            hardware, electrical, plumbing and paint solutions. Since{" "}
+            {company.established}, we've been serving homeowners, contractors,
+            builders and businesses with genuine products, competitive pricing
+            and dependable service.
           </p>
+
+          <p className="mt-5 text-xs leading-6 text-white/45">
+            ✓ Genuine Products <br />
+            ✓ Authorized Brand Dealer <br />
+            ✓ GST Billing <br />✓ Wholesale & Retail Supply
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href={`tel:${company.phone.replace(/\s/g, "")}`}
+              className="rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold transition hover:bg-blue-700"
+            >
+              Call Now
+            </a>
+
+            <a
+              href={`https://wa.me/${company.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl border border-white/15 px-4 py-2 text-xs font-semibold transition hover:bg-white hover:text-black"
+            >
+              WhatsApp
+            </a>
+          </div>
+
+          
         </div>
+
 
         <div>
           <h3 className="eyebrow text-blue-400 mb-5">Categories</h3>
           <ul className="space-y-3">
             {categories.map((c) => (
               <li key={c.id}>
-                <Link to="/products" className="text-white/70 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/products"
+                  className="text-white/70 hover:text-white text-sm transition-colors"
+                >
                   {c.name}
                 </Link>
               </li>
@@ -31,18 +67,23 @@ export default function Footer() {
           </ul>
         </div>
 
+        
+
         <div>
           <h3 className="eyebrow text-blue-400 mb-5">Company</h3>
           <ul className="space-y-3">
             {[
-              ['About', '/about'],
-              ['Services', '/services'],
-              ['Brands', '/brands'],
-              ['Gallery', '/gallery'],
-              ['Contact', '/contact'],
+              ["About", "/about"],
+              ["Services", "/services"],
+              ["Brands", "/brands"],
+              ["Gallery", "/gallery"],
+              ["Contact", "/contact"],
             ].map(([label, to]) => (
               <li key={to}>
-                <Link to={to} className="text-white/70 hover:text-white text-sm transition-colors">
+                <Link
+                  to={to}
+                  className="text-white/70 hover:text-white text-sm transition-colors"
+                >
                   {label}
                 </Link>
               </li>
@@ -55,19 +96,40 @@ export default function Footer() {
           <ul className="space-y-4 text-sm text-white/70">
             <li className="flex gap-3">
               <MapPin size={18} className="shrink-0 mt-0.5 text-blue-400" />
-              <span>{company.address.line1}, {company.address.line2}, {company.address.city}, {company.address.state} {company.address.pin}</span>
+              <span>
+                {company.address.line1}, {company.address.line2},{" "}
+                {company.address.city}, {company.address.state}{" "}
+                {company.address.pin}
+              </span>
             </li>
             <li className="flex gap-3">
               <Phone size={18} className="shrink-0 mt-0.5 text-blue-400" />
-              <a href={`tel:${company.phone.replace(/\s/g, '')}`} className="hover:text-white transition-colors">{company.phone}</a>
+              <a
+                href={`tel:${company.phone.replace(/\s/g, "")}`}
+                className="hover:text-white transition-colors"
+              >
+                {company.phone}
+              </a>
             </li>
             <li className="flex gap-3">
-              <MessageCircle size={18} className="shrink-0 mt-0.5 text-blue-400" />
-              <a href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">WhatsApp Us</a>
+              <MessageCircle
+                size={18}
+                className="shrink-0 mt-0.5 text-blue-400"
+              />
+              <a
+                href={`https://wa.me/${company.whatsapp}`}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                WhatsApp Us
+              </a>
             </li>
             <li className="flex gap-3">
               <Clock size={18} className="shrink-0 mt-0.5 text-blue-400" />
-              <span>{company.hours[0].day}: {company.hours[0].time}</span>
+              <span>
+                {company.hours[0].day}: {company.hours[0].time}
+              </span>
             </li>
           </ul>
         </div>
@@ -75,10 +137,12 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-wr py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/45">
-          <p>© {new Date().getFullYear()} {company.name}. All rights reserved.</p>
-          <p>Owned by {company.owners.join(' & ')} · Siwan, Bihar</p>
+          <p>
+            © {new Date().getFullYear()} {company.name}. All rights reserved.
+          </p>
+          <p>Owned by {company.owners.join(" & ")} · Siwan, Bihar</p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

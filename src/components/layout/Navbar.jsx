@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X, Phone } from 'lucide-react'
-import MagneticButton from '../ui/MagneticButton.jsx'
+import MagneticButton from '../common/MagneticButton.jsx'
 import { company } from '../../data/site.js'
 
 const links = [

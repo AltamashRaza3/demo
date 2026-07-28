@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import gsap from 'gsap'
 import { Home } from 'lucide-react'
-import Seo from '../components/ui/Seo.jsx'
-import MagneticButton from '../components/ui/MagneticButton.jsx'
+import Seo from '../components/common/Seo.jsx'
+import MagneticButton from '../components/common/MagneticButton.jsx'
 
 export default function NotFound() {
   useEffect(() => {

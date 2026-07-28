@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
-import Seo from '../components/ui/Seo.jsx'
-import SectionHeading from '../components/ui/SectionHeading.jsx'
-import useScrollReveal from '../hooks/useScrollReveal.js'
+import Seo from '../components/common/Seo.jsx'
+import SectionHeading from '../components/common/SectionHeading.jsx'
+import useScrollReveal from '../animations/useScrollReveal.js'
 import { galleryImages } from '../data/site.js'
 
 const mediaClass = {
@@ -12,7 +12,7 @@ const mediaClass = {
   Paint: 'wr-media-paint',
   Hardware: 'wr-media-hardware',
   Storefront: 'wr-media-electrical',
-  Delivery: 'wr-media-plumbing',
+
 }
 
 const filters = ['All', ...Array.from(new Set(galleryImages.map((g) => g.category)))]

@@ -10,7 +10,7 @@ const mediaClass = {
   Paint: 'wr-media-paint',
   Hardware: 'wr-media-hardware',
   Storefront: 'wr-media-electrical',
-  Delivery: 'wr-media-plumbing',
+
 }
 
 export default function GalleryPreview() {

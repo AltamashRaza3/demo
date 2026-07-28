@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { MapPin, Phone, MessageCircle, Clock, ChevronDown, Send } from 'lucide-react'
-import Seo from '../components/ui/Seo.jsx'
-import SectionHeading from '../components/ui/SectionHeading.jsx'
-import MagneticButton from '../components/ui/MagneticButton.jsx'
-import useScrollReveal from '../hooks/useScrollReveal.js'
+import Seo from '../components/common/Seo.jsx'
+import SectionHeading from '../components/common/SectionHeading.jsx'
+import MagneticButton from '../components/common/MagneticButton.jsx'
+import useScrollReveal from '../animations/useScrollReveal.js'
 import { company, faqs } from '../data/site.js'
 
 export default function Contact() {
@@ -21,75 +21,170 @@ export default function Contact() {
     <div ref={scope}>
       <Seo
         title="Contact"
-        description="Get in touch with W R Enterprises in Siwan — call, WhatsApp, or send a message for a quote on hardware, electrical, plumbing or paint supplies."
+        description="Visit W R Enterprises at Kutub Chhapra More, Siswan–Siwan Road, Siwan, Bihar 841241. Call +91 93517 85674 or WhatsApp us for hardware, electrical, plumbing and paint supplies."
       />
 
-      <section className="pt-16 pb-16 lg:pt-24 lg:pb-20 bg-smoke-50">
+      {/* Hero */}
+      <section className="bg-smoke-50 pt-16 pb-16 lg:pt-24 lg:pb-20">
         <div className="container-wr">
           <SectionHeading
             eyebrow="Contact"
-            title="Let's talk about your project."
-            description="Call, message us on WhatsApp, or send the form below — we usually reply within the hour during business hours."
+            title="Visit W R Enterprises or Get in Touch."
+            description="Visit our store, call us directly, chat on WhatsApp, or send the form below. We usually respond within an hour during business hours."
           />
         </div>
       </section>
 
-      <section className="py-16 lg:py-20 bg-white">
-        <div className="container-wr grid grid-cols-1 lg:grid-cols-5 gap-10">
-          {/* Form */}
-          <div data-reveal className="lg:col-span-3 rounded-3xl border border-smoke-200 p-8 lg:p-10">
+      {/* Contact */}
+      <section className="bg-white py-16 lg:py-20">
+        <div className="container-wr grid grid-cols-1 gap-10 lg:grid-cols-5">
+          {/* Contact Form */}
+          <div
+            data-reveal
+            className="rounded-3xl border border-smoke-200 p-6 sm:p-8 lg:col-span-3 lg:p-10"
+          >
             {submitted ? (
               <div className="py-16 text-center">
-                <h3 className="font-display font-bold text-2xl">Message received.</h3>
-                <p className="mt-3 text-ink-soft">We'll get back to you shortly — or call us directly for a faster reply.</p>
+                <h3 className="font-display text-2xl font-bold">Thank you!</h3>
+
+                <p className="mt-3 text-ink-soft">
+                  Your message has been received. We'll contact you shortly. For
+                  urgent enquiries, please call us directly.
+                </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <Field label="Full Name" id="name" placeholder="Your name" required />
-                  <Field label="Phone Number" id="phone" placeholder="+91 00000 00000" type="tel" required />
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  <Field
+                    label="Full Name"
+                    id="name"
+                    placeholder="Your Name"
+                    required
+                  />
+
+                  <Field
+                    label="Phone Number"
+                    id="phone"
+                    type="tel"
+                    placeholder="+91 93517 85674"
+                    required
+                  />
                 </div>
-                <Field label="Email (optional)" id="email" placeholder="you@example.com" type="email" />
+
+                <Field
+                  label="Email (Optional)"
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                />
+
                 <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-ink mb-2">What do you need?</label>
+                  <label
+                    htmlFor="message"
+                    className="mb-2 block text-sm font-semibold text-ink"
+                  >
+                    How can we help?
+                  </label>
+
                   <textarea
                     id="message"
                     rows={5}
                     required
-                    placeholder="Tell us about your project or the products you're looking for…"
+                    placeholder="Tell us about the products or services you need..."
                     className="w-full rounded-2xl bg-smoke-100 px-4 py-3.5 text-sm placeholder:text-ink-soft/60 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
+
                 <MagneticButton as="button" type="submit" variant="solid" full>
-                  <Send size={16} /> Send Message
+                  <Send size={16} />
+                  Send Message
                 </MagneticButton>
               </form>
             )}
           </div>
 
-          {/* Info */}
-          <div className="lg:col-span-2 space-y-5">
-            <div data-reveal className="rounded-3xl bg-smoke-50 border border-smoke-200 p-7 space-y-5">
-              <InfoRow icon={MapPin} label="Address">
-                {company.address.line1}, {company.address.line2}, {company.address.city}, {company.address.state} {company.address.pin}
-              </InfoRow>
-              <InfoRow icon={Phone} label="Phone">
-                <a href={`tel:${company.phone.replace(/\s/g, '')}`} className="hover:text-blue-600">{company.phone}</a>
-              </InfoRow>
-              <InfoRow icon={MessageCircle} label="WhatsApp">
-                <a href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer" className="hover:text-blue-600">Message us</a>
-              </InfoRow>
-              <InfoRow icon={Clock} label="Business Hours">
-                {company.hours.map((h) => (
-                  <span key={h.day} className="block">{h.day}: {h.time}</span>
-                ))}
-              </InfoRow>
+          {/* Contact Information */}
+          <div className="space-y-5 lg:col-span-2">
+            <div
+              data-reveal
+              className="rounded-3xl border border-smoke-200 bg-smoke-50 p-7"
+            >
+              <div className="space-y-6">
+                <InfoRow icon={MapPin} label="Address">
+                  Kutub Chhapra More
+                  <br />
+                  Siswan–Siwan Road
+                  <br />
+                  Siwan, Bihar 841241
+                </InfoRow>
+
+                <InfoRow icon={Phone} label="Phone">
+                  <a
+                    href="tel:+919351785674"
+                    className="transition-colors hover:text-blue-600"
+                  >
+                    +91 93517 85674
+                  </a>
+                </InfoRow>
+
+                <InfoRow icon={MessageCircle} label="WhatsApp">
+                  <a
+                    href="https://wa.me/919351785674"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:text-blue-600"
+                  >
+                    Chat on WhatsApp
+                  </a>
+                </InfoRow>
+
+                <InfoRow icon={Clock} label="Business Hours">
+                  {company.hours.map((h) => (
+                    <span key={h.day} className="block">
+                      {h.day}: {h.time}
+                    </span>
+                  ))}
+                </InfoRow>
+              </div>
             </div>
 
-            <div data-reveal className="rounded-3xl overflow-hidden aspect-video bg-smoke-100 grid place-items-center border border-smoke-200">
-              <div className="text-center text-ink-soft px-6">
-                <MapPin size={28} className="mx-auto mb-2" />
-                <p className="text-sm">Google Maps embed placeholder</p>
+            {/* Google Map */}
+            <div
+              data-reveal
+              className="overflow-hidden rounded-3xl border border-smoke-200 bg-white shadow-lg"
+            >
+              <iframe
+                title="W R Enterprises Location"
+                src="https://www.google.com/maps?q=Kutub+Chhapra+More+Siswan+Road+Siwan+Bihar+841241&output=embed"
+                className="h-72 w-full sm:h-80 md:h-96 lg:h-[420px]"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+
+              <div className="border-t border-smoke-200 p-5">
+                <h3 className="font-display text-lg font-bold text-ink">
+                  W R Enterprises
+                </h3>
+
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                  Kutub Chhapra More
+                  <br />
+                  Siswan–Siwan Road
+                  <br />
+                  Siwan, Bihar 841241
+                </p>
+
+                <MagneticButton
+                  as="a"
+                  href="https://www.google.com/maps/search/?api=1&query=Kutub+Chhapra+More+Siswan+Road+Siwan+Bihar+841241"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="solid"
+                  className="mt-5 w-full justify-center"
+                >
+                  Open in Google Maps
+                </MagneticButton>
               </div>
             </div>
           </div>
@@ -97,23 +192,35 @@ export default function Contact() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 lg:py-24 bg-smoke-50">
+      <section className="bg-smoke-50 py-16 lg:py-24">
         <div className="container-wr max-w-3xl">
-          <SectionHeading eyebrow="FAQ" title="Common questions." />
-          <div className="mt-10 divide-y divide-smoke-200 border-t border-b border-smoke-200">
+          <SectionHeading eyebrow="FAQ" title="Frequently Asked Questions" />
+
+          <div className="mt-10 divide-y divide-smoke-200 border-y border-smoke-200">
             {faqs.map((faq, i) => (
               <div key={faq.q} data-reveal>
                 <button
                   type="button"
                   onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
-                  className="w-full flex items-center justify-between gap-4 py-5 text-left"
                   aria-expanded={openFaq === i}
+                  className="flex w-full items-center justify-between gap-4 py-5 text-left"
                 >
-                  <span className="font-display font-semibold text-base">{faq.q}</span>
-                  <ChevronDown size={18} className={`shrink-0 text-ink-soft transition-transform ${openFaq === i ? 'rotate-180' : ''}`} />
+                  <span className="font-display text-base font-semibold">
+                    {faq.q}
+                  </span>
+
+                  <ChevronDown
+                    size={18}
+                    className={`shrink-0 transition-transform ${
+                      openFaq === i ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
+
                 {openFaq === i && (
-                  <p className="pb-5 text-sm text-ink-soft leading-relaxed">{faq.a}</p>
+                  <p className="pb-5 text-sm leading-relaxed text-ink-soft">
+                    {faq.a}
+                  </p>
                 )}
               </div>
             ))}
@@ -121,7 +228,7 @@ export default function Contact() {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
 function Field({ label, id, ...props }) {

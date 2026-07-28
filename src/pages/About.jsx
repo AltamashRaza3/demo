@@ -1,6 +1,6 @@
-import Seo from '../components/ui/Seo.jsx'
-import SectionHeading from '../components/ui/SectionHeading.jsx'
-import useScrollReveal from '../hooks/useScrollReveal.js'
+import Seo from '../components/common/Seo.jsx'
+import SectionHeading from '../components/common/SectionHeading.jsx'
+import useScrollReveal from '../animations/useScrollReveal.js'
 import { company, timeline, values } from '../data/site.js'
 import { Target, Eye } from 'lucide-react'
 

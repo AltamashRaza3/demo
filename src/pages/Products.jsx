@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Search } from 'lucide-react'
-import Seo from '../components/ui/Seo.jsx'
-import SectionHeading from '../components/ui/SectionHeading.jsx'
-import ProductCard from '../components/ui/ProductCard.jsx'
-import useScrollReveal from '../hooks/useScrollReveal.js'
+import Seo from '../components/common/Seo.jsx'
+import SectionHeading from '../components/common/SectionHeading.jsx'
+import ProductCard from '../components/common/ProductCard.jsx'
+import useScrollReveal from '../animations/useScrollReveal.js'
 import { categories } from '../data/site.js'
 
 // Expand the small featured list into a fuller catalogue view by pairing

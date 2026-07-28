@@ -7,8 +7,8 @@ export const company = {
   owners: ['Md. Asif', 'Yasir Wali'],
   rating: 5.0,
   reviewCount: 120,
-  phone: '+91 00000 00000',
-  whatsapp: '910000000000',
+  phone: "+91 93517 85674",
+  whatsapp: "919351785674",
   address: {
     line1: 'Kutub Chhapra More',
     line2: 'Siswan–Siwan Road',
@@ -26,7 +26,7 @@ export const company = {
 export const stats = [
   { label: 'Established', value: 2017, suffix: '', prefix: '', isYear: true },
   { label: 'Product Categories', value: 30, suffix: '+' },
-  { label: 'Trusted Brands', value: 3, suffix: '' },
+  { label: 'Trusted Brands', value: 7, suffix: '' },
   { label: 'KM Home Delivery', value: 10, suffix: '' },
   { label: 'Customer Satisfaction', value: 98, suffix: '%' },
 ]
@@ -86,10 +86,49 @@ export const services = [
 ]
 
 export const brands = [
-  { id: 'bajaj', name: 'Bajaj', category: 'Electrical', description: 'Fans, lighting and electrical appliances trusted in Indian homes for decades.' },
-  { id: 'birla-opus', name: 'Birla Opus', category: 'Paint', description: 'A new generation of premium paints from the Aditya Birla Group.' },
-  { id: 'hindware', name: 'Hindware', category: 'Plumbing', description: 'Sanitary ware and bath fittings synonymous with quality plumbing in India.' },
-]
+  {
+    id: "bajaj",
+    name: "Bajaj",
+    category: "Electrical",
+    description:
+      "Fans, lighting and electrical appliances trusted in Indian homes for decades.",
+  },
+  {
+    id: "birla-opus",
+    name: "Birla Opus",
+    category: "Paint",
+    description:
+      "A new generation of premium paints from the Aditya Birla Group.",
+  },
+  {
+    id: "hindware",
+    name: "Hindware",
+    category: "Plumbing",
+    description:
+      "Sanitary ware and bath fittings synonymous with quality plumbing in India.",
+  },
+  {
+    id: "cera",
+    name: "Cera",
+    category: "Plumbing",
+    description:
+      "Premium sanitaryware, faucets and wellness products known for quality and modern design.",
+  },
+  {
+    id: "indigo",
+    name: "Indigo Paints",
+    category: "Paint",
+    description:
+      "One of India's leading paint brands, offering premium interior, exterior, waterproofing and decorative coating solutions.",
+  },
+  {
+    id: "lnt",
+    name: "L&T Switchgear",
+    category: "Electrical",
+    description:
+      "Reliable modular switches, MCBs, distribution boards and electrical protection solutions trusted for residential, commercial and industrial installations.",
+  },
+];
 
 export const timeline = [
   { year: '2017', title: 'W R Enterprises founded', description: 'Opened at Kutub Chhapra More with a single vision — one roof for hardware, electrical, plumbing and paint.' },
@@ -118,7 +157,6 @@ export const galleryImages = [
   { id: 9, category: 'Hardware', title: 'Door lock & hinge counter' },
   { id: 10, category: 'Storefront', title: 'Billing counter' },
   { id: 11, category: 'Electrical', list: [], title: 'Cable coil storage' },
-  { id: 12, category: 'Delivery', title: 'Home delivery in progress' },
 ]
 
 export const reviews = [
@@ -129,9 +167,71 @@ export const reviews = [
 ]
 
 export const faqs = [
-  { q: 'Do you deliver outside the 10 KM radius?', a: 'Our standard free delivery covers a 10 KM radius from Kutub Chhapra More. For locations beyond that, call us and we\u2019ll work out a delivery arrangement.' },
-  { q: 'Can I get a GST invoice for a retail purchase?', a: 'Yes. Every purchase, retail or wholesale, can be billed with a proper GST-compliant invoice.' },
-  { q: 'Do you help with installation after purchase?', a: 'Yes. We coordinate with electricians, plumbers and painters we work with regularly, so what you buy gets installed correctly.' },
-  { q: 'Do you supply for large construction sites?', a: 'Yes, we handle bulk and wholesale orders for builders and contractors, staged around your project timeline.' },
-  { q: 'Which brands do you stock?', a: 'We are stockists for Bajaj (electrical), Birla Opus (paint) and Hindware (plumbing), alongside a wide range of hardware essentials.' },
-]
+  {
+    q: "Do you deliver outside the 10 KM radius?",
+    a: "Our standard free delivery covers a 10 KM radius from Kutub Chhapra More. For locations beyond that, please call us and we'll arrange delivery based on your location and order size.",
+  },
+  {
+    q: "Can I get a GST invoice for my purchase?",
+    a: "Yes. We provide GST-compliant invoices for both retail and wholesale purchases.",
+  },
+  {
+    q: "Do you supply materials for large construction projects?",
+    a: "Absolutely. We regularly supply contractors, builders, schools, commercial buildings, and residential projects with bulk quantities at competitive rates.",
+  },
+  {
+    q: "Do you offer wholesale pricing?",
+    a: "Yes. We offer special wholesale pricing for contractors, electricians, plumbers, painters, retailers, and bulk buyers. Contact us for quotation and dealer rates.",
+  },
+  {
+    q: "Can I place an order over WhatsApp?",
+    a: "Yes. Simply send us your product list or requirements on WhatsApp. We'll confirm availability, pricing, and arrange pickup or delivery.",
+  },
+  {
+    q: "Which brands are available at W R Enterprises?",
+    a: "We stock trusted brands including Bajaj, L&T Switchgear, Birla Opus, Indigo Paints, Hindware, CERA, and many other leading electrical, plumbing, hardware, and paint brands.",
+  },
+  {
+    q: "Do you provide installation services?",
+    a: "Yes. We can connect you with experienced electricians, plumbers, and painters who regularly work with our products for hassle-free installation.",
+  },
+  {
+    q: "Can I order products that are not currently in stock?",
+    a: "Yes. If a product is unavailable, we can usually arrange it through our supplier network within a short time. Contact us for availability.",
+  },
+  {
+    q: "What payment methods do you accept?",
+    a: "We accept Cash, UPI, PhonePe, Google Pay, Paytm, bank transfers, and other commonly used digital payment methods.",
+  },
+  {
+    q: "What are your business hours?",
+    a: "We are open Monday to Saturday from 8:00 AM to 8:30 PM and Sunday from 9:00 AM to 2:00 PM.",
+  },
+  {
+    q: "Where is W R Enterprises located?",
+    a: "We are located at Kutub Chhapra More, Siswan–Siwan Road, Siwan, Bihar 841241, with convenient parking and easy access from nearby areas.",
+  },
+  {
+    q: "How can I contact W R Enterprises?",
+    a: "Call us at +91 93517 85674 or send us a message on WhatsApp. Our team is happy to assist with quotations, product availability, and delivery information.",
+  },
+];
+
+
+export const socialLinks = {
+  phone: "+91 93517 85674",
+  whatsapp: "https://wa.me/919351785674",
+  maps:
+    "https://www.google.com/maps/search/?api=1&query=Kutub+Chhapra+More+Siswan+Road+Siwan+Bihar+841241",
+  email: "info@wrenterprises.in", // Update when available
+};
+
+export const businessHighlights = [
+  "Established in 2017",
+  "Authorized Brand Dealer",
+  "GST Billing Available",
+  "Bulk & Wholesale Supply",
+  "10 KM Home Delivery",
+  "Professional Installation Support",
+  "Premium Electrical, Plumbing, Hardware & Paint Solutions",
+];
