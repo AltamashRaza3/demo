@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react'
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Search } from 'lucide-react'
 import Seo from '../components/common/Seo.jsx'
 import SectionHeading from '../components/common/SectionHeading.jsx'
@@ -23,6 +25,28 @@ export default function Products() {
   const [activeFilter, setActiveFilter] = useState('All')
   const [query, setQuery] = useState('')
   const scope = useScrollReveal([activeFilter, query])
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const id = location.hash.substring(1);
+
+    const category = categories.find((c) => c.id === id);
+
+    if (category) {
+      setActiveFilter(category.name);
+
+      window.scrollTo({
+        top: 0,
+        behavior: "auto",
+      });
+
+      // Remove the hash from the URL
+      window.history.replaceState({}, "", "/products");
+    }
+  }, [location.hash]);
+
 
   const filtered = useMemo(() => {
     return allProducts.filter((p) => {

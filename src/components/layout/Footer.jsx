@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { HashLink } from "react-router-hash-link";
 import { MapPin, Phone, Clock, MessageCircle } from 'lucide-react'
 import { company, categories } from '../../data/site.js'
 
@@ -24,11 +25,10 @@ export default function Footer() {
           </p>
 
           <p className="mt-5 text-xs leading-6 text-white/45">
-             Genuine Products <br />
-             Authorized Brand Dealer <br />
-             GST Billing <br /> Wholesale & Retail Supply
+            Genuine Products <br />
+            Authorized Brand Dealer <br />
+            GST Billing <br /> Wholesale & Retail Supply
           </p>
-
         </div>
 
         <div>
@@ -37,7 +37,7 @@ export default function Footer() {
             {categories.map((c) => (
               <li key={c.id}>
                 <Link
-                  to="/products"
+                  to={`/products#${c.id}`}
                   className="text-white/70 hover:text-white text-sm transition-colors"
                 >
                   {c.name}
@@ -50,23 +50,35 @@ export default function Footer() {
         <div>
           <h3 className="eyebrow text-blue-400 mb-5">Company</h3>
           <ul className="space-y-3">
-            {[
-              ["About", "/about"],
-              ["Services", "/services"],
-              ["Brands", "/brands"],
-              ["Gallery", "/gallery"],
-              ["FAQ", "/faq"],
-              ["Contact", "/contact"],
-            ].map(([label, to]) => (
-              <li key={to}>
-                <Link
-                  to={to}
-                  className="text-white/70 hover:text-white text-sm transition-colors"
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+
+            <li>
+              <Link to="/services">Services</Link>
+            </li>
+
+            <li>
+              <Link to="/brands">Brands</Link>
+            </li>
+
+            <li>
+              <Link to="/gallery">Gallery</Link>
+            </li>
+
+            <li>
+              <HashLink
+                smooth
+                to="/contact#faq"
+                className="text-white hover:text-white text-sm transition-colors"
+              >
+                FAQ
+              </HashLink>
+            </li>
+
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
           </ul>
         </div>
 

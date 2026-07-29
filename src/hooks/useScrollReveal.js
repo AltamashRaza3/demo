@@ -1,20 +1,18 @@
-import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Reveals all [data-reveal] children inside the returned ref with a fade-up,
- * staggered by document order, triggered once when scrolled into view.
- */
-export default function useScrollReveal(deps = []) {
-  const scope = useRef(null)
+export default function useScrollReveal() {
+  const scope = useRef(null);
 
   useEffect(() => {
-    if (!scope.current) return undefined
+    if (!scope.current) return;
+
     const ctx = gsap.context(() => {
-      const targets = gsap.utils.toArray('[data-reveal]', scope.current)
+      const targets = gsap.utils.toArray("[data-reveal]", scope.current);
+
       targets.forEach((el, i) => {
         gsap.fromTo(
           el,
@@ -23,21 +21,20 @@ export default function useScrollReveal(deps = []) {
             autoAlpha: 1,
             y: 0,
             duration: 0.9,
-            ease: 'power3.out',
+            ease: "power3.out",
             delay: (i % 6) * 0.06,
             scrollTrigger: {
               trigger: el,
-              start: 'top 88%',
+              start: "top 88%",
               once: true,
             },
-          },
-        )
-      })
-    }, scope)
+          }
+        );
+      });
+    }, scope);
 
-    return () => ctx.revert()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps)
+    return () => ctx.revert();
+  }, []);
 
-  return scope
+  return scope;
 }

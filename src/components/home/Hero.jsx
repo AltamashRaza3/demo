@@ -131,18 +131,19 @@ export default function Hero() {
             <MagneticButton
               as="a"
               href={`https://wa.me/${company.whatsapp}`}
-              className="border-0 bg-[#25D366] text-white hover:bg-[#20ba5a]"
+              className="!bg-[#25D366] !text-white hover:!bg-[#20ba5a]"
             >
-              <MagneticButton
-                as="a"
-                href={`tel:${company.phone.replace(/\s/g, "")}`}
-                variant="light"
-              >
-                <Phone size={16} />
-                Call Now
-              </MagneticButton>
               <MessageCircle size={16} />
               WhatsApp
+            </MagneticButton>
+
+            <MagneticButton
+              as="a"
+              href={`tel:${company.phone.replace(/\s/g, "")}`}
+              variant="light"
+            >
+              <Phone size={16} />
+              Call Now
             </MagneticButton>
           </div>
 

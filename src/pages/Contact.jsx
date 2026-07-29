@@ -1,10 +1,11 @@
-import { useState } from 'react'
 import { MapPin, Phone, MessageCircle, Clock, ChevronDown, Send } from 'lucide-react'
 import Seo from '../components/common/Seo.jsx'
 import SectionHeading from '../components/common/SectionHeading.jsx'
 import MagneticButton from '../components/common/MagneticButton.jsx'
 import useScrollReveal from '../animations/useScrollReveal.js'
 import { company, faqs } from '../data/site.js'
+
+
 
 export default function Contact() {
   const scope = useScrollReveal()
@@ -192,7 +193,7 @@ export default function Contact() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-smoke-50 py-16 lg:py-24">
+      <section id="faq" className="bg-smoke-50 py-16 lg:py-24">
         <div className="container-wr max-w-3xl">
           <SectionHeading eyebrow="FAQ" title="Frequently Asked Questions" />
 
