@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import ProductCard from '../common/ProductCard.jsx'
 import SectionHeading from '../common/SectionHeading.jsx'
-import useScrollReveal from '../../animations/useScrollReveal.js'
+import useScrollReveal from '../../hooks/useScrollReveal.js'
 import { featuredProducts } from '../../data/site.js'
 
 export default function FeaturedProducts() {

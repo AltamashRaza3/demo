@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import SectionHeading from '../common/SectionHeading.jsx'
-import useScrollReveal from '../../animations/useScrollReveal.js'
+import useScrollReveal from '../../hooks/useScrollReveal.js'
 import { services } from '../../data/site.js'
 
 export default function ServicesOverview() {

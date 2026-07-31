@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './Navbar.jsx'
 import Footer from './Footer.jsx'
 import FloatingActions from './FloatingActions.jsx'
-import useLenis from '../../animations/useLenis.js'
+import useLenis from '../../hooks/useLenis.js'
 import useScrollToTop from '../../hooks/useScrollToTop.js'
 
 export default function Layout() {

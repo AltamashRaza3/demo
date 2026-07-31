@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import SectionHeading from '../ui/SectionHeading.jsx'
+import SectionHeading from '../common/SectionHeading.jsx'
 import useScrollReveal from '../../hooks/useScrollReveal.js'
 import { galleryImages } from '../../data/site.js'
 

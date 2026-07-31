@@ -1,22 +1,28 @@
-import { MapPin, Phone, MessageCircle, Clock, ChevronDown, Send } from 'lucide-react'
-import Seo from '../components/common/Seo.jsx'
-import SectionHeading from '../components/common/SectionHeading.jsx'
-import MagneticButton from '../components/common/MagneticButton.jsx'
-import useScrollReveal from '../animations/useScrollReveal.js'
-import { company, faqs } from '../data/site.js'
-
-
+import { useState } from "react";
+import {
+  MapPin,
+  Phone,
+  MessageCircle,
+  Clock,
+  ChevronDown,
+  Send,
+} from "lucide-react";
+import Seo from "../components/common/Seo.jsx";
+import SectionHeading from "../components/common/SectionHeading.jsx";
+import MagneticButton from "../components/common/MagneticButton.jsx";
+import useScrollReveal from "../hooks/useScrollReveal.js";
+import { company, faqs } from "../data/site.js";
 
 export default function Contact() {
-  const scope = useScrollReveal()
-  const [submitted, setSubmitted] = useState(false)
-  const [openFaq, setOpenFaq] = useState(0)
+  const scope = useScrollReveal();
+  const [submitted, setSubmitted] = useState(false);
+  const [openFaq, setOpenFaq] = useState(0);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // UI-only form: no backend wired up. Replace with a form handler / API call.
-    setSubmitted(true)
-  }
+    setSubmitted(true);
+  };
 
   return (
     <div ref={scope}>
@@ -235,7 +241,9 @@ export default function Contact() {
 function Field({ label, id, ...props }) {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-semibold text-ink mb-2">{label}</label>
+      <label htmlFor={id} className="block text-sm font-semibold text-ink mb-2">
+        {label}
+      </label>
       <input
         id={id}
         name={id}
@@ -243,7 +251,7 @@ function Field({ label, id, ...props }) {
         {...props}
       />
     </div>
-  )
+  );
 }
 
 function InfoRow({ icon: Icon, label, children }) {
@@ -257,5 +265,5 @@ function InfoRow({ icon: Icon, label, children }) {
         <p className="mt-0.5 text-ink-soft leading-relaxed">{children}</p>
       </div>
     </div>
-  )
+  );
 }

@@ -5,7 +5,7 @@ import { Search } from 'lucide-react'
 import Seo from '../components/common/Seo.jsx'
 import SectionHeading from '../components/common/SectionHeading.jsx'
 import ProductCard from '../components/common/ProductCard.jsx'
-import useScrollReveal from '../animations/useScrollReveal.js'
+import useScrollReveal from '../hooks/useScrollReveal.js'
 import { categories } from '../data/site.js'
 
 // Expand the small featured list into a fuller catalogue view by pairing

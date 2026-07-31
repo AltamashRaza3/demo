@@ -1,7 +1,7 @@
 import Seo from '../components/common/Seo.jsx'
 import SectionHeading from '../components/common/SectionHeading.jsx'
 import MagneticButton from '../components/common/MagneticButton.jsx'
-import useScrollReveal from '../animations/useScrollReveal.js'
+import useScrollReveal from "../hooks/useScrollReveal.js";
 import { services } from '../data/site.js'
 import {
   ShoppingBag, Truck, Boxes, Receipt, PackageCheck,

@@ -1,6 +1,6 @@
 import { Star } from 'lucide-react'
 import SectionHeading from '../common/SectionHeading.jsx'
-import useScrollReveal from '../../animations/useScrollReveal.js'
+import useScrollReveal from '../../hooks/useScrollReveal.js'
 import { reviews, company } from '../../data/site.js'
 
 export default function ReviewsSection() {

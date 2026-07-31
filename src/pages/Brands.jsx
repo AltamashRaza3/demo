@@ -1,6 +1,6 @@
 import Seo from '../components/common/Seo.jsx'
 import SectionHeading from '../components/common/SectionHeading.jsx'
-import useScrollReveal from '../animations/useScrollReveal.js'
+import useScrollReveal from "../hooks/useScrollReveal.js";
 import { brands } from '../data/site.js'
 
 const mediaClass = {

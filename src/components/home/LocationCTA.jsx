@@ -1,6 +1,6 @@
 import { MapPin, Phone, MessageCircle } from "lucide-react";
 import MagneticButton from "../common/MagneticButton.jsx";
-import useScrollReveal from "../../animations/useScrollReveal.js";
+import useScrollReveal from "../../hooks/useScrollReveal.js";
 import { company } from "../../data/site.js";
 
 export default function LocationCTA() {

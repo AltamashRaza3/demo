@@ -3,7 +3,7 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Seo from '../components/common/Seo.jsx'
 import SectionHeading from '../components/common/SectionHeading.jsx'
-import useScrollReveal from '../animations/useScrollReveal.js'
+import useScrollReveal from '../hooks/useScrollReveal.js'
 import { galleryImages } from '../data/site.js'
 
 const mediaClass = {

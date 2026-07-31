@@ -1,5 +1,5 @@
 import { ShieldCheck, Truck, Receipt, Wrench } from 'lucide-react'
-import useScrollReveal from '../../animations/useScrollReveal.js'
+import useScrollReveal from '../../hooks/useScrollReveal.js'
 
 const badges = [
   { icon: ShieldCheck, label: 'Genuine Brands', sub: 'Bajaj · Birla Opus · Hindware ·Indigo' },
