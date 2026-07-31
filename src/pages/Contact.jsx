@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   MapPin,
   Phone,
@@ -17,6 +17,16 @@ export default function Contact() {
   const scope = useScrollReveal();
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
+
+const [mapStatus, setMapStatus] = useState("loading");
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setMapStatus((current) => (current === "loading" ? "error" : current));
+  }, 8000); // wait 8 seconds
+
+  return () => clearTimeout(timer);
+}, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -154,21 +164,59 @@ export default function Contact() {
                 </InfoRow>
               </div>
             </div>
-
             {/* Google Map */}
             <div
               data-reveal
               className="overflow-hidden rounded-3xl border border-smoke-200 bg-white shadow-lg"
             >
-              <iframe
-                title="W R Enterprises Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d223.8284011737617!2d84.36216026544572!3d26.155842437216293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3992fb916d7ac0ab%3A0xea60d8b76d51b642!2sW%20R%20ENTERPRISES!5e0!3m2!1sen!2sin!4v1785493946198!5m2!1sen!2sin"
-                className="h-72 w-full sm:h-80 md:h-96 lg:h-[420px]"
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
+              <div className="relative h-72 sm:h-80 md:h-96 lg:h-[420px]">
+                {mapStatus === "loading" && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-smoke-50">
+                    <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-200 border-t-blue-600"></div>
+                    <p className="mt-4 text-sm text-ink-soft">
+                      Loading Google Maps...
+                    </p>
+                  </div>
+                )}
+
+                {mapStatus === "error" && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-smoke-50 px-6 text-center">
+                    <MapPin className="mb-4 text-blue-600" size={40} />
+
+                    <h3 className="font-display text-lg font-bold text-ink">
+                      Unable to load the map
+                    </h3>
+
+                    <p className="mt-2 text-sm text-ink-soft">
+                      Please check your internet connection or open the location
+                      directly in Google Maps.
+                    </p>
+
+                    <a
+                      href="https://maps.google.com/?cid=16893529517452019266"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
+                    >
+                      Open in Google Maps
+                    </a>
+                  </div>
+                )}
+
+                <iframe
+                  title="W R Enterprises Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d223.8284011737617!2d84.36216026544572!3d26.155842437216293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3992fb916d7ac0ab%3A0xea60d8b76d51b642!2sW%20R%20ENTERPRISES!5e0!3m2!1sen!2sin!4v1785493946198!5m2!1sen!2sin"
+                  className={`h-full w-full transition-opacity duration-500 ${
+                    mapStatus === "loaded" ? "opacity-100" : "opacity-0"
+                  }`}
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  onLoad={() => setMapStatus("loaded")}
+                  
+                />
+              </div>
 
               <div className="border-t border-smoke-200 p-5">
                 <h3 className="font-display text-lg font-bold text-ink">
