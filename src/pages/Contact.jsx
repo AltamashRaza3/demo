@@ -162,11 +162,12 @@ export default function Contact() {
             >
               <iframe
                 title="W R Enterprises Location"
-                src="https://www.google.com/maps?q=Kutub+Chhapra+More+Siswan+Road+Siwan+Bihar+841241&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d223.8284011737617!2d84.36216026544572!3d26.155842437216293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3992fb916d7ac0ab%3A0xea60d8b76d51b642!2sW%20R%20ENTERPRISES!5e0!3m2!1sen!2sin!4v1785493946198!5m2!1sen!2sin"
                 className="h-72 w-full sm:h-80 md:h-96 lg:h-[420px]"
+                style={{ border: 0 }}
                 loading="lazy"
                 allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
+                referrerPolicy="strict-origin-when-cross-origin"
               />
 
               <div className="border-t border-smoke-200 p-5">
@@ -184,7 +185,7 @@ export default function Contact() {
 
                 <MagneticButton
                   as="a"
-                  href="https://www.google.com/maps/search/?api=1&query=Kutub+Chhapra+More+Siswan+Road+Siwan+Bihar+841241"
+                  href="https://maps.google.com/?cid=16893529517452019266"
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="solid"

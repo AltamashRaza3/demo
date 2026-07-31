@@ -287,9 +287,8 @@ export const faqs = [
 export const socialLinks = {
   phone: "+91 93517 85674",
   whatsapp: "https://wa.me/919351785674",
-  maps:
-    "https://www.google.com/maps/search/?api=1&query=Kutub+Chhapra+More+Siswan+Road+Siwan+Bihar+841241",
-  email: "info@wrenterprises.in", // Update when available
+  maps: "https://maps.google.com/?cid=16893529517452019266",
+  email: "info@wrenterprises.in",
 };
 
 export const businessHighlights = [
