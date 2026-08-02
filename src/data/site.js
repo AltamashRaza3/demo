@@ -5,10 +5,21 @@ import bulbImg from "../assets/images/products/bulb.png";
 import doorLocksImg from "../assets/images/products/doorlocks.png";
 import faucetImg from "../assets/images/products/faucet.png";
 import paintImg from "../assets/images/products/paint.png";
+import allpaint from "../assets/images/products/paintsbuckets.png";
+import rollersbrushes from "../assets/images/products/rollers&brushes.png"
 import plumbingPipeImg from "../assets/images/products/plumbing pipe.png";
 import switchesImg from "../assets/images/products/switches.png";
 import waterTankImg from "../assets/images/products/watertank1.png";
 import wiresImg from "../assets/images/products/wires.png";
+import primerwaterproof from "../assets/images/products/primer.png";
+
+
+import bulbDisplay from "../assets/images/gallery/bulb-display.png";
+import doorLockDisplay from "../assets/images/gallery/door-lock-display.png";
+import paintDisplay from "../assets/images/gallery/paints.png";
+import paintMixingCounter from "../assets/images/gallery/paint-mixing-counter.png";
+import pipeRacks from "../assets/images/gallery/piperacks.png";
+import wallPuttyDisplay from "../assets/images/gallery/wallputty.png";
 
 
 export const company = {
@@ -212,18 +223,145 @@ export const values = [
 ]
 
 export const galleryImages = [
-  { id: 1, category: 'Electrical', title: 'Wiring & switch aisle' },
-  { id: 2, category: 'Plumbing', title: 'Pipe & fitting racks' },
-  { id: 3, category: 'Paint', title: 'Paint mixing counter' },
-  { id: 4, category: 'Hardware', title: 'Tools & fasteners wall' },
-  { id: 5, category: 'Storefront', title: 'W R Enterprises frontage' },
-  { id: 6, category: 'Electrical', title: 'LED lighting display' },
-  { id: 7, category: 'Plumbing', title: 'Sanitary ware showroom' },
-  { id: 8, category: 'Paint', title: 'Exterior paint shelf' },
-  { id: 9, category: 'Hardware', title: 'Door lock & hinge counter' },
-  { id: 10, category: 'Storefront', title: 'Billing counter' },
-  { id: 11, category: 'Electrical', list: [], title: 'Cable coil storage' },
-]
+  // ===== REAL IMAGES =====
+  {
+    id: 1,
+    category: "Electrical",
+    title: "Lighting & Electrical Display",
+    image: bulbDisplay,
+  },
+  {
+    id: 2,
+    category: "Paint",
+    title: "Premium Paint Collection",
+    image: paintDisplay,
+  },
+  {
+    id: 3,
+    category: "Paint",
+    title: "Wall Putty & Construction Materials",
+    image: wallPuttyDisplay,
+  },
+  {
+    id: 4,
+    category: "Plumbing",
+    title: "Pipe & Fittings Section",
+    image: pipeRacks,
+  },
+  {
+    id: 5,
+    category: "Hardware",
+    title: "Door Locks & Hardware Collection",
+    image: doorLockDisplay,
+  },
+  {
+    id: 6,
+    category: "Paint",
+    title: "Computerized Paint Mixing Counter",
+    image: paintMixingCounter,
+  },
+
+  // ===== TEMP PLACEHOLDERS (replace later) =====
+  {
+    id: 7,
+    category: "Electrical",
+    title: "Modular Switch Collection",
+    image: bulbDisplay,
+  },
+  {
+    id: 8,
+    category: "Electrical",
+    title: "Wires & Cable Display",
+    image: wiresImg,
+  },
+  {
+    id: 9,
+    category: "Electrical",
+    title: "MCBs & Distribution Boards",
+    image: bulbDisplay,
+  },
+  {
+    id: 10,
+    category: "Electrical",
+    title: "Ceiling Fans & Exhaust Fans",
+    image: bulbDisplay,
+  },
+
+  {
+    id: 11,
+    category: "Plumbing",
+    title: "Bathroom Faucets & Mixers",
+    image: pipeRacks,
+  },
+  {
+    id: 12,
+    category: "Plumbing",
+    title: "Wash Basin Collection",
+    image: pipeRacks,
+  },
+  {
+    id: 13,
+    category: "Plumbing",
+    title: "Toilet Seat & Sanitary Ware",
+    image: pipeRacks,
+  },
+  {
+    id: 14,
+    category: "Plumbing",
+    title: "Water Tank Collection",
+    image: waterTankImg, 
+  },
+
+  {
+    id: 15,
+    category: "Hardware",
+    title: "Adhesives & Construction Chemicals",
+    image: doorLockDisplay,
+  },
+  {
+    id: 16,
+    category: "Hardware",
+    title: "Silicone & Sealants",
+    image: doorLockDisplay,
+  },
+  {
+    id: 17,
+    category: "Hardware",
+    title: "Cutters, Blades & Hand Tools",
+    image: doorLockDisplay,
+  },
+  {
+    id: 18,
+    category: "Hardware",
+    title: "Fasteners, Nails & Screws",
+    image: doorLockDisplay,
+  },
+  {
+    id: 19,
+    category: "Hardware",
+    title: "Premium Door Handles & Hinges",
+    image: doorLockDisplay,
+  },
+
+  {
+    id: 20,
+    category: "Paint",
+    title: "Interior & Exterior Paint Range",
+    image: allpaint,
+  },
+  {
+    id: 21,
+    category: "Paint",
+    title: "Primer & Waterproofing Solutions",
+    image: primerwaterproof,
+  },
+  {
+    id: 22,
+    category: "Paint",
+    title: "Paint Brushes & Rollers",
+    image: rollersbrushes,
+  },
+];
 
 export const reviews = [
   { id: 1, name: 'Rakesh Kumar', rating: 5, text: 'Everything I needed for my house wiring in one visit. Genuine Bajaj products and fair pricing.' },

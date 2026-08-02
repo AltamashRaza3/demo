@@ -54,7 +54,9 @@ export default function Gallery() {
                 type="button"
                 onClick={() => setActiveFilter(f)}
                 className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
-                  activeFilter === f ? 'bg-blue-600 text-white' : 'bg-smoke-100 text-ink-soft hover:bg-smoke-200'
+                  activeFilter === f
+                    ? "bg-blue-600 text-white"
+                    : "bg-smoke-100 text-ink-soft hover:bg-smoke-200"
                 }`}
               >
                 {f}
@@ -65,17 +67,28 @@ export default function Gallery() {
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
             {filtered.map((img, i) => (
               <button
-                data-reveal
-                type="button"
                 key={img.id}
+                type="button"
+                data-reveal
                 onClick={() => openAt(i)}
-                className={`wr-media ${mediaClass[img.category]} mb-5 w-full rounded-2xl break-inside-avoid flex items-end p-4 text-left ${
-                  i % 4 === 0 ? 'aspect-[3/4]' : 'aspect-square'
-                } hover:opacity-90 transition-opacity`}
+                className={`group relative mb-5 w-full overflow-hidden rounded-2xl break-inside-avoid ${
+                  i % 4 === 0 ? "aspect-[3/4]" : "aspect-square"
+                }`}
               >
-                <span className="text-xs font-semibold text-white/90 bg-black/25 rounded-full px-3 py-1 backdrop-blur-sm">
-                  {img.title}
-                </span>
+                <img
+                  src={img.image}
+                  alt={img.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+                <div className="absolute bottom-4 left-4">
+                  <span className="rounded-full bg-black/35 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+                    {img.title}
+                  </span>
+                </div>
               </button>
             ))}
           </div>
@@ -85,50 +98,27 @@ export default function Gallery() {
       <AnimatePresence>
         {lightboxIndex !== null && filtered[lightboxIndex] && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-ink/95 flex items-center justify-center p-6"
-            onClick={close}
+            key={lightboxIndex}
+            initial={{ scale: 0.94, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.96, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-5xl overflow-hidden rounded-3xl"
           >
-            <button
-              type="button"
-              aria-label="Close"
-              onClick={close}
-              className="absolute top-6 right-6 grid place-items-center w-11 h-11 rounded-full bg-white/10 text-white hover:bg-white/20"
-            >
-              <X size={20} />
-            </button>
-            <button
-              type="button"
-              aria-label="Previous image"
-              onClick={(e) => { e.stopPropagation(); prev() }}
-              className="absolute left-4 sm:left-8 grid place-items-center w-11 h-11 rounded-full bg-white/10 text-white hover:bg-white/20"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              type="button"
-              aria-label="Next image"
-              onClick={(e) => { e.stopPropagation(); next() }}
-              className="absolute right-4 sm:right-8 grid place-items-center w-11 h-11 rounded-full bg-white/10 text-white hover:bg-white/20"
-            >
-              <ChevronRight size={20} />
-            </button>
+            <img
+              src={filtered[lightboxIndex].image}
+              alt={filtered[lightboxIndex].title}
+              className="max-h-[85vh] w-full object-contain"
+            />
 
-            <motion.div
-              key={lightboxIndex}
-              initial={{ scale: 0.94, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.96, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className={`wr-media ${mediaClass[filtered[lightboxIndex].category]} w-full max-w-3xl aspect-[4/3] rounded-3xl flex items-end p-6`}
-            >
-              <span className="text-white font-display font-bold text-lg">{filtered[lightboxIndex].title}</span>
-            </motion.div>
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+              <h3 className="font-display text-xl font-bold text-white">
+                {filtered[lightboxIndex].title}
+              </h3>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 }
