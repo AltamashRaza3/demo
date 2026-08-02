@@ -4,7 +4,7 @@ import { ChevronDown, Phone, MessageCircle } from "lucide-react";
 import MagneticButton from "../common/MagneticButton.jsx";
 import { company } from "../../data/site.js";
 
-import heroMain from "../../assets/images/hero/hero-main.png";
+import heroMain from "../../assets/images/hero/hero-main.webp";
 
 const words = [
   "Everything",

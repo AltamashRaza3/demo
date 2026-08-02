@@ -1,7 +1,7 @@
-import electricalImg from "../../assets/images/categories/electrical.png";
-import plumbingImg from "../../assets/images/categories/plumbing.png";
-import paintImg from "../../assets/images/categories/paint.png";
-import hardwareImg from "../../assets/images/categories/hardware.png";
+import electricalImg from "../../assets/images/categories/electrical.webp";
+import plumbingImg from "../../assets/images/categories/plumbing.webp";
+import paintImg from "../../assets/images/categories/paint.webp";
+import hardwareImg from "../../assets/images/categories/hardware.webp";
 
 const categoryImages = {
   electrical: electricalImg,

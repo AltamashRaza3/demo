@@ -1,25 +1,38 @@
 // Central content source — keeps copy separate from components.
 // Replace placeholder values with real business data/photos when available.
 
-import bulbImg from "../assets/images/products/bulb.png";
-import doorLocksImg from "../assets/images/products/doorlocks.png";
-import faucetImg from "../assets/images/products/faucet.png";
-import paintImg from "../assets/images/products/paint.png";
-import allpaint from "../assets/images/products/paintsbuckets.png";
-import rollersbrushes from "../assets/images/products/rollers&brushes.png"
-import plumbingPipeImg from "../assets/images/products/plumbing pipe.png";
-import switchesImg from "../assets/images/products/switches.png";
-import waterTankImg from "../assets/images/products/watertank1.png";
-import wiresImg from "../assets/images/products/wires.png";
-import primerwaterproof from "../assets/images/products/primer.png";
+import bulbImg from "../assets/images/products/bulb.webp";
+import doorLocksImg from "../assets/images/products/doorlocks.webp";
+import faucetImg from "../assets/images/products/faucet.webp";
+import paintImg from "../assets/images/products/paint.webp";
+import allpaint from "../assets/images/products/paintsbuckets.webp";
+import rollersbrushes from "../assets/images/products/rollers&brushes.webp"
+import plumbingPipeImg from "../assets/images/products/plumbing pipe.webp";
+import switchesImg from "../assets/images/products/switches.webp";
+import waterTankImg from "../assets/images/products/watertank1.webp";
+import wiresImg from "../assets/images/products/wires.webp";
+import primerwaterproof from "../assets/images/products/primer.webp";
+import toilet from "../assets/images/products/basintoilet.webp";
+import washbasin from "../assets/images/products/washbasin.webp";
+import faucetmixtures from "../assets/images/products/faucetmixtures.webp";
+import adhesive from "../assets/images/products/adhesive.webp";
+import selenet from "../assets/images/products/selenet.webp";
+import fasteners from "../assets/images/products/fastners.webp";
+import blades from "../assets/images/products/blades.webp";
+import doorshandles from "../assets/images/products/doorshandles.webp";
+import pipesjoints from "../assets/images/products/pipesjoints.webp";
+import switches from "../assets/images/products/modularswitches.webp";
+import wiresc from "../assets/images/products/wiresc.webp";
+import fans from "../assets/images/products/fans.webp";
 
 
-import bulbDisplay from "../assets/images/gallery/bulb-display.png";
-import doorLockDisplay from "../assets/images/gallery/door-lock-display.png";
-import paintDisplay from "../assets/images/gallery/paints.png";
-import paintMixingCounter from "../assets/images/gallery/paint-mixing-counter.png";
-import pipeRacks from "../assets/images/gallery/piperacks.png";
-import wallPuttyDisplay from "../assets/images/gallery/wallputty.png";
+
+import bulbDisplay from "../assets/images/gallery/bulb-display.webp";
+import doorLockDisplay from "../assets/images/gallery/door-lock-display.webp";
+import paintDisplay from "../assets/images/gallery/paints.webp";
+import paintMixingCounter from "../assets/images/gallery/paint-mixing-counter.webp";
+import pipeRacks from "../assets/images/gallery/piperacks.webp";
+import wallPuttyDisplay from "../assets/images/gallery/wallputty.webp";
 
 
 export const company = {
@@ -261,18 +274,17 @@ export const galleryImages = [
     image: paintMixingCounter,
   },
 
-  // ===== TEMP PLACEHOLDERS (replace later) =====
   {
     id: 7,
     category: "Electrical",
     title: "Modular Switch Collection",
-    image: bulbDisplay,
+    image: switches,
   },
   {
     id: 8,
     category: "Electrical",
     title: "Wires & Cable Display",
-    image: wiresImg,
+    image: wiresc,
   },
   {
     id: 9,
@@ -284,26 +296,26 @@ export const galleryImages = [
     id: 10,
     category: "Electrical",
     title: "Ceiling Fans & Exhaust Fans",
-    image: bulbDisplay,
+    image: fans,
   },
 
   {
     id: 11,
     category: "Plumbing",
     title: "Bathroom Faucets & Mixers",
-    image: pipeRacks,
+    image: faucetmixtures,
   },
   {
     id: 12,
     category: "Plumbing",
     title: "Wash Basin Collection",
-    image: pipeRacks,
+    image: washbasin,
   },
   {
     id: 13,
     category: "Plumbing",
     title: "Toilet Seat & Sanitary Ware",
-    image: pipeRacks,
+    image: toilet,
   },
   {
     id: 14,
@@ -314,49 +326,58 @@ export const galleryImages = [
 
   {
     id: 15,
-    category: "Hardware",
-    title: "Adhesives & Construction Chemicals",
-    image: doorLockDisplay,
+    category: "Plumbing",
+    title: "UPVC PVC Joints",
+    image: pipesjoints,
   },
+
   {
     id: 16,
     category: "Hardware",
-    title: "Silicone & Sealants",
-    image: doorLockDisplay,
+    title: "Adhesives & Construction Chemicals",
+    image: adhesive,
   },
   {
     id: 17,
     category: "Hardware",
-    title: "Cutters, Blades & Hand Tools",
-    image: doorLockDisplay,
+    title: "Silicone & Sealants",
+    image: selenet,
   },
   {
     id: 18,
     category: "Hardware",
-    title: "Fasteners, Nails & Screws",
-    image: doorLockDisplay,
+    title: "Cutters, Blades & Hand Tools",
+    image: blades,
   },
   {
     id: 19,
     category: "Hardware",
-    title: "Premium Door Handles & Hinges",
-    image: doorLockDisplay,
+    title: "Fasteners, Nails & Screws",
+    image: fasteners,
   },
-
   {
     id: 20,
+    category: "Hardware",
+    title: "Premium Door Handles & Hinges",
+    image: doorshandles,
+  },
+
+  
+
+  {
+    id: 21,
     category: "Paint",
     title: "Interior & Exterior Paint Range",
     image: allpaint,
   },
   {
-    id: 21,
+    id: 22,
     category: "Paint",
     title: "Primer & Waterproofing Solutions",
     image: primerwaterproof,
   },
   {
-    id: 22,
+    id: 23,
     category: "Paint",
     title: "Paint Brushes & Rollers",
     image: rollersbrushes,
