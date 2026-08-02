@@ -12,7 +12,7 @@ export default function CategoriesShowcase() {
           description="From switchboards to sanitary ware—every line is sourced, billed and delivered from a single address on Siswan–Siwan Road."
         />
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category) => (
             <CategoryCard key={category.id} category={category} />
           ))}
