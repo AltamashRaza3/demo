@@ -14,7 +14,21 @@ export default function CategoryCard({ category }) {
   return (
     <article
       data-reveal
-      className="group relative w-full max-w-[320px] overflow-hidden rounded-3xl border border-smoke-200 bg-white shadow-soft transition-all duration-500 hover:-translate-y-2 hover:shadow-card"
+      className="
+    group
+    relative
+    w-full
+    overflow-hidden
+    rounded-3xl
+    border
+    border-smoke-200
+    bg-white
+    shadow-soft
+    transition-all
+    duration-500
+    hover:-translate-y-2
+    hover:shadow-card
+  "
     >
       {/* Image */}
       <div className="relative h-56 overflow-hidden bg-gradient-to-br from-smoke-50 to-white">
