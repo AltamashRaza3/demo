@@ -4,14 +4,7 @@ import SectionHeading from '../common/SectionHeading.jsx'
 import useScrollReveal from '../../hooks/useScrollReveal.js'
 import { galleryImages } from '../../data/site.js'
 
-// const mediaClass = {
-//   Electrical: 'wr-media-electrical',
-//   Plumbing: 'wr-media-plumbing',
-//   Paint: 'wr-media-paint',
-//   Hardware: 'wr-media-hardware',
-//   Storefront: 'wr-media-electrical',
 
-// }
 
 export default function GalleryPreview() {
   const scope = useScrollReveal()
@@ -34,12 +27,12 @@ export default function GalleryPreview() {
           </Link>
         </div>
 
-        <div className="mt-12 columns-2 sm:columns-3 gap-5 [column-fill:_balance]">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {preview.map((img, i) => (
             <div
               key={img.id}
               data-reveal
-              className={`group relative mb-5 overflow-hidden rounded-2xl break-inside-avoid ${
+              className={`group relative overflow-hidden rounded-2xl ${
                 i % 3 === 1 ? "aspect-[3/4]" : "aspect-square"
               }`}
             >
