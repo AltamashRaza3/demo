@@ -169,19 +169,23 @@ export default function Hero() {
           <img
             src={heroMain}
             alt="W R Enterprises - Hardware, Electrical, Plumbing & Paint"
+            fetchPriority="high"
+            decoding="async"
+            width="1100"
+            height="900"
             className="
-            relative
-            z-10
-            w-full
-            max-w-md
-            object-contain
-            drop-shadow-[0_45px_80px_rgba(0,0,0,0.16)]
-            sm:max-w-lg
-            md:max-w-xl
-            lg:max-w-[840px]
-            xl:max-w-[980px]
-            2xl:max-w-[1100px]
-          "
+              relative
+              z-10
+              w-full
+              max-w-md
+              object-contain
+              drop-shadow-[0_45px_80px_rgba(0,0,0,0.16)]
+              sm:max-w-lg
+              md:max-w-xl
+              lg:max-w-[840px]
+              xl:max-w-[980px]
+              2xl:max-w-[1100px]
+            "
           />
         </div>
       </div>
