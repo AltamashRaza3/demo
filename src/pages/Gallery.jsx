@@ -1,9 +1,12 @@
 import { useMemo, useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+
 import Seo from "../components/common/Seo.jsx";
 import SectionHeading from "../components/common/SectionHeading.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
+import ImageWithSkeleton from "../components/common/ImageWithSkeleton.jsx";
+
 import { galleryImages } from "../data/site.js";
 
 const filters = [
@@ -17,30 +20,85 @@ export default function Gallery() {
 
   const scope = useScrollReveal([activeFilter]);
 
-  const filtered = useMemo(
-    () =>
-      galleryImages.filter(
-        (g) => activeFilter === "All" || g.category === activeFilter,
-      ),
-    [activeFilter],
-  );
+  const filtered = useMemo(() => {
+    return galleryImages.filter(
+      (g) => activeFilter === "All" || g.category === activeFilter,
+    );
+  }, [activeFilter]);
+
+  /* ---------------------------------------------------------
+     Preload first visible gallery images
+  --------------------------------------------------------- */
+
+  useEffect(() => {
+    filtered.slice(0, 6).forEach((img) => {
+      const preload = new Image();
+      preload.src = img.image;
+    });
+  }, [filtered]);
+
+  /* ---------------------------------------------------------
+     Preload next image for lightbox
+  --------------------------------------------------------- */
 
   useEffect(() => {
     if (lightboxIndex === null) return;
 
-    const next = filtered[(lightboxIndex + 1) % filtered.length];
+    const nextImage = filtered[(lightboxIndex + 1) % filtered.length];
 
-    if (next) {
+    if (nextImage) {
       const preload = new Image();
-      preload.src = next.image;
+      preload.src = nextImage.image;
     }
   }, [lightboxIndex, filtered]);
 
-  const openAt = (i) => setLightboxIndex(i);
+  /* ---------------------------------------------------------
+     Keyboard Navigation + Scroll Lock
+  --------------------------------------------------------- */
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e) => {
+      switch (e.key) {
+        case "Escape":
+          close();
+          break;
+
+        case "ArrowRight":
+          next();
+          break;
+
+        case "ArrowLeft":
+          prev();
+          break;
+
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [lightboxIndex]);
+
+  const openAt = (index) => setLightboxIndex(index);
+
   const close = () => setLightboxIndex(null);
-  const next = () => setLightboxIndex((i) => (i + 1) % filtered.length);
+
+  const next = () =>
+    setLightboxIndex((prevIndex) => (prevIndex + 1) % filtered.length);
+
   const prev = () =>
-    setLightboxIndex((i) => (i - 1 + filtered.length) % filtered.length);
+    setLightboxIndex(
+      (prevIndex) => (prevIndex - 1 + filtered.length) % filtered.length,
+    );
 
   return (
     <div>
@@ -49,59 +107,65 @@ export default function Gallery() {
         description="A look inside the W R Enterprises showroom in Siwan — electrical, plumbing, paint and hardware sections."
       />
 
+      {/* ---------------------------------------------------- */}
+      {/* Hero */}
+      {/* ---------------------------------------------------- */}
+
       <section className="bg-smoke-50 pt-16 pb-12 lg:pt-24 lg:pb-16">
         <div className="container-wr">
           <SectionHeading eyebrow="Gallery" title="Step inside the showroom." />
         </div>
       </section>
 
+      {/* ---------------------------------------------------- */}
+      {/* Gallery */}
+      {/* ---------------------------------------------------- */}
+
       <section ref={scope} className="bg-white py-12 lg:py-16">
         <div className="container-wr">
           {/* Filters */}
+
           <div className="mb-10 flex flex-wrap gap-2">
-            {filters.map((f) => (
+            {filters.map((filter) => (
               <button
-                key={f}
+                key={filter}
                 type="button"
-                onClick={() => setActiveFilter(f)}
-                className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-                  activeFilter === f
+                onClick={() => setActiveFilter(filter)}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${
+                  activeFilter === filter
                     ? "bg-blue-600 text-white"
                     : "bg-smoke-100 text-ink-soft hover:bg-smoke-200"
                 }`}
               >
-                {f}
+                {filter}
               </button>
             ))}
           </div>
 
-          {/* Gallery */}
-          <div className="columns-1 gap-5 sm:columns-2 lg:columns-3 [column-fill:_balance]">
-            {filtered.map((img, i) => (
+          {/* Masonry */}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+            {filtered.map((img, index) => (
               <button
                 key={img.id}
                 type="button"
                 data-reveal
-                onClick={() => openAt(i)}
-                className={`group relative mb-5 w-full overflow-hidden rounded-2xl break-inside-avoid ${
-                  i % 4 === 0 ? "aspect-[3/4]" : "aspect-square"
+                onClick={() => openAt(index)}
+                className={`group relative w-full overflow-hidden rounded-2xl ${
+                  index % 5 === 0 ? "aspect-[3/4]" : "aspect-square"
                 }`}
               >
-                <img
+                <ImageWithSkeleton
                   src={img.image}
                   alt={img.title}
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
-                  width="900"
-                  height="900"
+                  priority={index < 6}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-                <div className="absolute bottom-4 left-4">
-                  <span className="rounded-full bg-black/35 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="inline-block rounded-full bg-black/35 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
                     {img.title}
                   </span>
                 </div>
@@ -111,54 +175,81 @@ export default function Gallery() {
         </div>
       </section>
 
+      {/* ---------------------------------------------------- */}
       {/* Lightbox */}
-      <AnimatePresence>
+      {/* ---------------------------------------------------- */}
+
+      <AnimatePresence mode="wait">
         {lightboxIndex !== null && filtered[lightboxIndex] && (
           <motion.div
-            className="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 p-6 backdrop-blur-sm"
+            className="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 p-4 backdrop-blur-md sm:p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             onClick={close}
           >
             {/* Close */}
+
             <button
+              type="button"
+              aria-label="Close"
               onClick={close}
-              className="absolute right-6 top-6 rounded-full bg-white/10 p-3 text-white hover:bg-white/20"
+              className="absolute right-5 top-5 z-20 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
             >
               <X size={22} />
             </button>
 
             {/* Previous */}
+
             <button
+              type="button"
+              aria-label="Previous"
               onClick={(e) => {
                 e.stopPropagation();
                 prev();
               }}
-              className="absolute left-6 rounded-full bg-white/10 p-3 text-white hover:bg-white/20"
+              className="absolute left-4 top-1/2 z-20 -translate-y-1/2 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20 md:left-8"
             >
               <ChevronLeft size={24} />
             </button>
 
             {/* Next */}
+
             <button
+              type="button"
+              aria-label="Next"
               onClick={(e) => {
                 e.stopPropagation();
                 next();
               }}
-              className="absolute right-6 rounded-full bg-white/10 p-3 text-white hover:bg-white/20"
+              className="absolute right-4 top-1/2 z-20 -translate-y-1/2 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20 md:right-8"
             >
               <ChevronRight size={24} />
             </button>
 
+            {/* Image */}
+
             <motion.div
               key={filtered[lightboxIndex].id}
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              transition={{ duration: 0.25 }}
+              initial={{
+                opacity: 0,
+                scale: 0.96,
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.96,
+              }}
+              transition={{
+                duration: 0.3,
+                ease: "easeOut",
+              }}
               onClick={(e) => e.stopPropagation()}
-              className="max-w-5xl"
+              className="w-full max-w-6xl"
             >
               <img
                 src={filtered[lightboxIndex].image}
@@ -166,13 +257,25 @@ export default function Gallery() {
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
-                className="max-h-[85vh] w-full rounded-3xl object-contain"
+                draggable={false}
+                className="
+                  max-h-[85vh]
+                  w-full
+                  select-none
+                  rounded-3xl
+                  object-contain
+                  shadow-2xl
+                "
               />
 
-              <div className="mt-5 text-center">
-                <h3 className="font-display text-xl font-bold text-white">
+              <div className="mt-6 text-center">
+                <h3 className="font-display text-2xl font-bold text-white">
                   {filtered[lightboxIndex].title}
                 </h3>
+
+                <p className="mt-2 text-sm text-white/70">
+                  {lightboxIndex + 1} / {filtered.length}
+                </p>
               </div>
             </motion.div>
           </motion.div>

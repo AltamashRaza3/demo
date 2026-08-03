@@ -24,7 +24,7 @@ import pipesjoints from "../assets/images/products/pipesjoints.webp";
 import switches from "../assets/images/products/modularswitches.webp";
 import wiresc from "../assets/images/products/wiresc.webp";
 import fans from "../assets/images/products/fans.webp";
-
+import mcb from "../assets/images/products/mcb.webp";
 
 
 import bulbDisplay from "../assets/images/gallery/bulb-display.webp";
@@ -94,7 +94,7 @@ export const categories = [
     tagline: 'Tools, locks & fasteners',
     items: ['Tools', 'Door Locks', 'Hinges', 'Fasteners', 'Adhesives', 'Safety Equipment'],
   },
-]
+] 
 
 export const featuredProducts = [
   {
@@ -290,7 +290,7 @@ export const galleryImages = [
     id: 9,
     category: "Electrical",
     title: "MCBs & Distribution Boards",
-    image: bulbDisplay,
+    image: mcb,
   },
   {
     id: 10,
