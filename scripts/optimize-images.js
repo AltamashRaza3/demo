@@ -2,59 +2,35 @@ import fs from "fs/promises";
 import path from "path";
 import sharp from "sharp";
 
-const ASSETS_DIR = path.join(process.cwd(), "src", "assets");
+const INPUT_DIR = path.join(process.cwd(), "src", "assets");
+const OUTPUT_DIR = path.join(process.cwd(), "src", "assets-optimized");
 
-// Supported formats
 const IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp"];
 
-// Folder specific optimization rules
-const FOLDER_RULES = {
-  hero: {
-    width: 1600,
-    quality: 68,
-  },
-
-  gallery: {
-    width: 1100,
-    quality: 55,
-  },
-
-  products: {
-    width: 750,
-    quality: 58,
-  },
-
-  categories: {
-    width: 700,
-    quality: 60,
-  },
-
-  brands: {
-    width: 450,
-    quality: 78,
-  },
-
-  icons: {
-    width: 128,
-    quality: 90,
-  },
+// Target sizes
+const RULES = {
+  hero: { width: 1600, targetKB: 200, startQuality: 75 },
+  gallery: { width: 1200, targetKB: 90, startQuality: 72 },
+  products: { width: 800, targetKB: 60, startQuality: 70 },
+  categories: { width: 700, targetKB: 45, startQuality: 72 },
+  brands: { width: 450, targetKB: 30, startQuality: 82 },
+  icons: { width: 128, targetKB: 10, startQuality: 90 },
 };
 
-let totalOriginal = 0;
-let totalOptimized = 0;
-let optimizedCount = 0;
+let totalBefore = 0;
+let totalAfter = 0;
+let optimized = 0;
+let skipped = 0;
 
-async function getFiles(dir) {
-  const entries = await fs.readdir(dir, {
-    withFileTypes: true,
-  });
+async function walk(dir) {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
 
   const files = await Promise.all(
     entries.map((entry) => {
       const full = path.join(dir, entry.name);
 
       return entry.isDirectory()
-        ? getFiles(full)
+        ? walk(full)
         : Promise.resolve(full);
     })
   );
@@ -65,15 +41,16 @@ async function getFiles(dir) {
 function getRule(file) {
   const normalized = file.replace(/\\/g, "/").toLowerCase();
 
-  for (const folder in FOLDER_RULES) {
-    if (normalized.includes(`/${folder}/`)) {
-      return FOLDER_RULES[folder];
+  for (const key of Object.keys(RULES)) {
+    if (normalized.includes(`/${key}/`)) {
+      return RULES[key];
     }
   }
 
   return {
     width: 1200,
-    quality: 60,
+    targetKB: 80,
+    startQuality: 70,
   };
 }
 
@@ -82,18 +59,37 @@ async function optimize(file) {
 
   if (!IMAGE_EXTENSIONS.includes(ext)) return;
 
-  const isWebp = ext === ".webp";
+  const relative = path.relative(INPUT_DIR, file);
 
-  const output = isWebp
-    ? file.replace(".webp", ".tmp.webp")
-    : file.replace(ext, ".webp");
+  const output = path.join(
+    OUTPUT_DIR,
+    relative.replace(ext, ".webp")
+  );
 
-  const { width, quality } = getRule(file);
+  await fs.mkdir(path.dirname(output), { recursive: true });
 
   const before = await fs.stat(file);
 
-  try {
-    await sharp(file)
+  const { width, targetKB, startQuality } = getRule(file);
+
+  // Skip already small images
+  if (before.size <= targetKB * 1024) {
+    skipped++;
+
+    await fs.copyFile(file, output);
+
+    console.log(
+      `✓ ${relative} already ${(before.size / 1024).toFixed(0)} KB`
+    );
+
+    return;
+  }
+
+  let quality = startQuality;
+  let buffer;
+
+  while (quality >= 35) {
+    buffer = await sharp(file)
       .rotate()
       .resize({
         width,
@@ -104,65 +100,69 @@ async function optimize(file) {
         quality,
         effort: 6,
         smartSubsample: true,
-        nearLossless: false,
-        alphaQuality: 80,
       })
-      .toFile(output);
+      .toBuffer();
 
-    if (isWebp) {
-      await fs.unlink(file);
-      await fs.rename(output, file);
+    if (buffer.length <= targetKB * 1024) {
+      break;
     }
 
-    const finalFile = isWebp ? file : output;
-
-    const after = await fs.stat(finalFile);
-
-    totalOriginal += before.size;
-    totalOptimized += after.size;
-    optimizedCount++;
-
-    const saved = (
-      ((before.size - after.size) / before.size) *
-      100
-    ).toFixed(1);
-
-    console.log(
-      `✔ ${path.basename(file)} → ${path.basename(finalFile)} (${saved}% smaller)`
-    );
-  } catch (err) {
-    console.error(`✖ Failed: ${file}`);
-    console.error(err.message);
+    quality -= 5;
   }
+
+  await fs.writeFile(output, buffer);
+
+  const after = await fs.stat(output);
+
+  optimized++;
+
+  totalBefore += before.size;
+  totalAfter += after.size;
+
+  const saved = (
+    ((before.size - after.size) / before.size) *
+    100
+  ).toFixed(1);
+
+  console.log(
+    `✔ ${relative}
+   ${(before.size / 1024).toFixed(0)} KB → ${(after.size / 1024).toFixed(0)} KB
+   Quality: ${quality}
+   Saved: ${saved}%`
+  );
 }
 
 (async () => {
   console.log("\n🚀 Optimizing Images...\n");
 
-  const files = await getFiles(ASSETS_DIR);
+  const files = await walk(INPUT_DIR);
 
   for (const file of files) {
     await optimize(file);
   }
 
-  console.log("\n--------------------------------------");
+  console.log("\n----------------------------------------");
 
-  console.log(`Images Optimized : ${optimizedCount}`);
+  console.log(`Optimized : ${optimized}`);
+  console.log(`Skipped   : ${skipped}`);
 
   console.log(
-    `Original Size    : ${(totalOriginal / 1024 / 1024).toFixed(2)} MB`
+    `Original  : ${(totalBefore / 1024 / 1024).toFixed(2)} MB`
   );
 
   console.log(
-    `Optimized Size   : ${(totalOptimized / 1024 / 1024).toFixed(2)} MB`
+    `Optimized : ${(totalAfter / 1024 / 1024).toFixed(2)} MB`
   );
 
-  console.log(
-    `Saved            : ${(
-      ((totalOriginal - totalOptimized) / totalOriginal) *
-      100
-    ).toFixed(1)}%`
-  );
+  if (totalBefore > 0) {
+    console.log(
+      `Saved     : ${(
+        ((totalBefore - totalAfter) / totalBefore) *
+        100
+      ).toFixed(1)}%`
+    );
+  }
 
-  console.log("--------------------------------------\n");
+  console.log("----------------------------------------");
+  console.log(`Output folder: ${OUTPUT_DIR}\n`);
 })();

@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "optimize:images": "node scripts/optimize-images.js",
     "update:webp": "node scripts/update-webp-imports.js",
+    "replace:images": "node scripts/replace-assets.js",
     "cleanup:images": "node scripts/cleanup-images.js"
   },
   "dependencies": {

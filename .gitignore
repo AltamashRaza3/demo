@@ -2,3 +2,11 @@ node_modules
 dist
 .DS_Store
 *.log
+# Temporary optimized assets
+src/assets-optimized/
+
+# Image optimization scripts
+scripts/replace-assets.js
+scripts/optimize-images.js
+scripts/cleanup-images.js
+scripts/update-webp-imports.js
